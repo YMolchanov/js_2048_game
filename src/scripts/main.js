@@ -31,7 +31,7 @@ function updateUI() {
 
   scoreEl.textContent = game.getScore();
   winMsg.classList.toggle('hidden', game.getStatus() !== 'won');
-  loseMsg.classList.toggle('hidden', game.getStatus() !== 'lost');
+  loseMsg.classList.toggle('hidden', game.getStatus() !== 'lose');
 }
 
 startBtn.addEventListener('click', () => {
