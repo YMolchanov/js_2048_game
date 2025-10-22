@@ -134,7 +134,7 @@ class Game {
     }
 
     const original = JSON.stringify(this.board);
-    let board = [...this.board];
+    let board = this.board.map((row) => [...row]);
 
     const rotate = (matrix) =>
       matrix[0].map((_, i) => matrix.map((row) => row[i]));
