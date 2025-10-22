@@ -134,36 +134,39 @@ class Game {
     }
 
     const original = JSON.stringify(this.board);
-    let board = this.board.map((row) => [...row]);
+    let board = this.board.map((row) => [...row]); // глибока копія
 
     const rotate = (matrix) =>
       matrix[0].map((_, i) => matrix.map((row) => row[i]));
-    const reverse = (matrix) => matrix.map((row) => row.reverse());
 
+    // Підготовка до злиття залежно від напрямку
     if (direction === 'up') {
       board = rotate(board);
     }
 
     if (direction === 'down') {
-      board = reverse(rotate(board));
+      board = rotate(board).map((row) => row.reverse());
     }
 
     if (direction === 'right') {
-      board = reverse(board);
+      board = board.map((row) => row.reverse());
     }
 
+    // Злиття плиток
     board = board.map((row) => this.mergeRow(row));
 
+    // Повернення до оригінального напрямку
     if (direction === 'up') {
       board = rotate(board);
     }
 
     if (direction === 'down') {
-      board = rotate(reverse(board));
+      board = board.map((row) => row.reverse());
+      board = rotate(board);
     }
 
     if (direction === 'right') {
-      board = reverse(board);
+      board = board.map((row) => row.reverse());
     }
 
     const moved = JSON.stringify(board) !== original;
